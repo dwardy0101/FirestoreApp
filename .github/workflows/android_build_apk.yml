@@ -9,9 +9,6 @@ on:
 #   cancel-in-progress: false
 
 jobs:
-  build-aar:
-    runs-on: ubuntu-latest
-
   build-apk:
     runs-on: ubuntu-latest
 
