@@ -59,4 +59,6 @@ dependencies {
     runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")
     // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android
     runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+
+    runtimeOnly("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
 }

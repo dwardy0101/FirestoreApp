@@ -1,7 +1,6 @@
 package com.example.firestore.domain
 
 import android.util.Log
-import com.google.firebase.firestore.AggregateSource
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
@@ -84,11 +83,13 @@ class FireStoreDataSource(
 
             val db = Firebase.firestore
             val count = db.collection(collection)
-                .count()
-                .get(AggregateSource.SERVER)
+                .limit(1)
+                .get()
+//                .count()
+//                .get(AggregateSource.SERVER)
                 .await()
 
-            count.count > 0
+            !count.isEmpty
         } catch (e: Exception) {
             Log.e("Firestore", "Failed to check collection", e)
             false
@@ -111,7 +112,9 @@ class FireStoreDataSource(
         return items
     }
 
-    suspend fun generateLetters(): List<CommonModel> {
+    suspend fun generateLetters(value: Boolean): List<CommonModel> {
+        if (!value)  return emptyList<CommonModel>()
+
         if (hasCollections(1)) {
             return fetchData(1)
         }
@@ -125,7 +128,9 @@ class FireStoreDataSource(
         return letters
     }
 
-    suspend fun generateNumbers(): List<CommonModel> {
+    suspend fun generateNumbers(value: Boolean): List<CommonModel> {
+        if (!value)  return emptyList<CommonModel>()
+
         if (hasCollections(2)) {
             return fetchData(2)
         }
@@ -138,7 +143,9 @@ class FireStoreDataSource(
         return nums
     }
 
-    suspend fun generateMixed(): List<CommonModel> {
+    suspend fun generateMixed(value: Boolean): List<CommonModel> {
+        if (!value) return emptyList<CommonModel>()
+
         if (hasCollections(3)) {
             return fetchData(3)
         }
