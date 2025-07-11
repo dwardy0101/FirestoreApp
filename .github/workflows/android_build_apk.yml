@@ -70,7 +70,8 @@ jobs:
       - name: Use Upload Results
         run: |
           # Access the entire results object
-          echo "Full results: ${{ steps.deploygate.outputs.results }}"
+          echo '${{ toJSON(steps.deploygate.outputs.results) }}' > output.json
+          cat output.json | jq
           
           # Access specific values using fromJSON
           echo "App name: ${{ fromJSON(steps.deploygate.outputs.results).name }}"
