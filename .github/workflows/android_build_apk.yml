@@ -15,7 +15,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: fawazahmed0/action-debug@main
+      # Debug
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          detached: true
             
       - name: Checkout Android Project
         uses: actions/checkout@v4
