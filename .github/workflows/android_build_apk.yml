@@ -15,6 +15,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - run: |
+          echo "check github context below: "
+          ${{ github }}
+
+          echo "check github event below: "
+           ${{ github.event }}
+           
       # Debug
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
@@ -54,7 +61,7 @@ jobs:
           api_token: ${{ secrets.DEPLOYGATE_API_TOKEN }}
           owner_name: ${{ secrets.DEPLOYGATE_OWNER_NAME }}
           file_path: app/build/outputs/apk/release/app-release-unsigned.apk
-          message: "PR #${{ github.event.pull_request.number }} - ${{ github.event.pull_request.title }}"
+          message: "PR ${{ github.event.pull_request.number }} - ${{ github.event.pull_request.title }}"
           distribution_name: "PR #${github.event.pull_request.number}"
           release_note: |
             Branch: ${{ github.head_ref }}
